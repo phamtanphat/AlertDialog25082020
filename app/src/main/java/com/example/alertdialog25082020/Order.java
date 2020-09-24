@@ -46,7 +46,17 @@ public class Order {
         this.vegetableType = vegetableType;
     }
 
-    class Builder implements OrderBuilder{
+    @Override
+    public String toString() {
+        return "Order{" +
+                "location=" + location +
+                ", breadType=" + breadType +
+                ", sauceType=" + sauceType +
+                ", vegetableType=" + vegetableType +
+                '}';
+    }
+
+    static class Builder implements OrderBuilder{
         private Location location;
         private BreadType breadType;
         private SauceType sauceType;
@@ -80,5 +90,4 @@ public class Order {
             return new Order(location,breadType,sauceType,vegetableType);
         }
     }
-
 }
