@@ -39,16 +39,27 @@ public class MainActivity extends AppCompatActivity {
                 builder.setCancelable(false);
 
                 final String[] arrayAnimal = {"Cat", "Dog", "Mouse", "Pig", "Bird"};
-
+                boolean[] arrayChecked = {false , false ,false ,false ,false};
                 // single choice
-                builder.setSingleChoiceItems(arrayAnimal, -1, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int position) {
-                        mPosition = position;
-                    }
-                });
+//                builder.setSingleChoiceItems(arrayAnimal, -1, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int position) {
+//                        mPosition = position;
+//                    }
+//                });
 
                 // Multiple choice
+
+                builder.setMultiChoiceItems(arrayAnimal, arrayChecked, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                        if (isChecked){
+                            Toast.makeText(MainActivity.this,"Bạn đã chọn : "+ arrayAnimal[which], Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(MainActivity.this,"Bạn bỏ chọn : "+ arrayAnimal[which], Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
                 // Nút có
                 builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
