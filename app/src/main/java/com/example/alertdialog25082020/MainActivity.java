@@ -37,21 +37,26 @@ public class MainActivity extends AppCompatActivity {
         mBtnOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Thông báo");
 
-                builder.setIcon(R.mipmap.ic_launcher);
-                builder.setCancelable(false);
+            }
+        });
+    }
+    private void setAlertDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Thông báo");
 
-                final String[] arrayAnimal = {"Cat", "Dog", "Mouse", "Pig", "Bird"};
-                final boolean[] arrayChecked = {false , false ,false ,false ,false};
+        builder.setIcon(R.mipmap.ic_launcher);
+        builder.setCancelable(false);
+
+        final String[] arrayAnimal = {"Cat", "Dog", "Mouse", "Pig", "Bird"};
+        final boolean[] arrayChecked = {false , false ,false ,false ,false};
 //
 //                Integer[] arrayNumbers = {1,10,11,0,21};
 //
 //                Arrays.sort(arrayNumbers);
 
 //                Arrays.sort(arrayAnimal);
-                // single choice
+        // single choice
 //                builder.setSingleChoiceItems(arrayAnimal, -1, new DialogInterface.OnClickListener() {
 //                    @Override
 //                    public void onClick(DialogInterface dialog, int position) {
@@ -59,48 +64,44 @@ public class MainActivity extends AppCompatActivity {
 //                    }
 //                });
 
-                // Multiple choice
+        // Multiple choice
 
-                builder.setMultiChoiceItems(arrayAnimal, arrayChecked, new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+        builder.setMultiChoiceItems(arrayAnimal, arrayChecked, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 //                        if (isChecked){
 //                            Toast.makeText(MainActivity.this,"Bạn đã chọn : "+ arrayAnimal[which], Toast.LENGTH_SHORT).show();
 //                        }else{
 //                            Toast.makeText(MainActivity.this,"Bạn bỏ chọn : "+ arrayAnimal[which], Toast.LENGTH_SHORT).show();
 //                        }
-
-                    }
-                });
-                // Nút có
-                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        // Nút có
+        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 //                        if (mPosition == -1) {
 //                            Toast.makeText(MainActivity.this, "Bạn chưa chọn con vật", Toast.LENGTH_SHORT).show();
 //                            return;
 //                        }
 //                        Toast.makeText(MainActivity.this, arrayAnimal[mPosition], Toast.LENGTH_SHORT).show();
-                        for (int i = 0; i < arrayChecked.length ; i++) {
-                            if (arrayChecked[i]){
-                                mResult += arrayAnimal[i] + " , ";
-                            }
-                        }
-                        mResult = mResult.substring(0 , mResult.length() - 3);
-                        Toast.makeText(MainActivity.this, mResult, Toast.LENGTH_SHORT).show();
+                for (int i = 0; i < arrayChecked.length ; i++) {
+                    if (arrayChecked[i]){
+                        mResult += arrayAnimal[i] + " , ";
                     }
-                });
-
-                // Nút hủy
-                builder.setNeutralButton("Hủy", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                builder.show();
+                }
+                mResult = mResult.substring(0 , mResult.length() - 3);
+                Toast.makeText(MainActivity.this, mResult, Toast.LENGTH_SHORT).show();
             }
         });
-    }
 
+        // Nút hủy
+        builder.setNeutralButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
+    }
 }
