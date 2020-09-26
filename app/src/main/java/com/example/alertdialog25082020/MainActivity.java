@@ -11,11 +11,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     Button mBtnOpen;
     int mPosition = -1;
-
+    String mResult = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +44,13 @@ public class MainActivity extends AppCompatActivity {
                 builder.setCancelable(false);
 
                 final String[] arrayAnimal = {"Cat", "Dog", "Mouse", "Pig", "Bird"};
-                boolean[] arrayChecked = {false , false ,false ,false ,false};
+                final boolean[] arrayChecked = {false , false ,false ,false ,false};
+//
+//                Integer[] arrayNumbers = {1,10,11,0,21};
+//
+//                Arrays.sort(arrayNumbers);
+
+//                Arrays.sort(arrayAnimal);
                 // single choice
 //                builder.setSingleChoiceItems(arrayAnimal, -1, new DialogInterface.OnClickListener() {
 //                    @Override
@@ -53,22 +64,30 @@ public class MainActivity extends AppCompatActivity {
                 builder.setMultiChoiceItems(arrayAnimal, arrayChecked, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                        if (isChecked){
-                            Toast.makeText(MainActivity.this,"Bạn đã chọn : "+ arrayAnimal[which], Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(MainActivity.this,"Bạn bỏ chọn : "+ arrayAnimal[which], Toast.LENGTH_SHORT).show();
-                        }
+//                        if (isChecked){
+//                            Toast.makeText(MainActivity.this,"Bạn đã chọn : "+ arrayAnimal[which], Toast.LENGTH_SHORT).show();
+//                        }else{
+//                            Toast.makeText(MainActivity.this,"Bạn bỏ chọn : "+ arrayAnimal[which], Toast.LENGTH_SHORT).show();
+//                        }
+
                     }
                 });
                 // Nút có
                 builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (mPosition == -1) {
-                            Toast.makeText(MainActivity.this, "Bạn chưa chọn con vật", Toast.LENGTH_SHORT).show();
-                            return;
+//                        if (mPosition == -1) {
+//                            Toast.makeText(MainActivity.this, "Bạn chưa chọn con vật", Toast.LENGTH_SHORT).show();
+//                            return;
+//                        }
+//                        Toast.makeText(MainActivity.this, arrayAnimal[mPosition], Toast.LENGTH_SHORT).show();
+                        for (int i = 0; i < arrayChecked.length ; i++) {
+                            if (arrayChecked[i]){
+                                mResult += arrayAnimal[i] + " , ";
+                            }
                         }
-                        Toast.makeText(MainActivity.this, arrayAnimal[mPosition], Toast.LENGTH_SHORT).show();
+                        mResult = mResult.substring(0 , mResult.length() - 3);
+                        Toast.makeText(MainActivity.this, mResult, Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -79,10 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
-
                 builder.show();
-
-
             }
         });
     }
