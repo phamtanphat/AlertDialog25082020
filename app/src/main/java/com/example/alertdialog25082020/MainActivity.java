@@ -9,10 +9,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     Button mBtnOpen;
+    int mPosition = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,22 +34,30 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("Thông báo");
-                builder.setMessage("Bạn có muốn thoát ứng dụng");
+
                 builder.setIcon(R.mipmap.ic_launcher);
                 builder.setCancelable(false);
 
+                final String[] arrayAnimal = {"Cat", "Dog", "Mouse", "Pig", "Bird"};
+
+                // single choice
+                builder.setSingleChoiceItems(arrayAnimal, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int position) {
+                        mPosition = position;
+                    }
+                });
+
+                // Multiple choice
                 // Nút có
                 builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                });
-                // Nút không
-                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                        if (mPosition == -1) {
+                            Toast.makeText(MainActivity.this, "Bạn chưa chọn con vật", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        Toast.makeText(MainActivity.this, arrayAnimal[mPosition], Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -54,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setNeutralButton("Hủy", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+
                     }
                 });
 
