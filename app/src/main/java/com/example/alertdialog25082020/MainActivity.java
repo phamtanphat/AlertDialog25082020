@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.alertdialog25082020.helpers.DialogHelper;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
         mBtnOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                DialogHelper dialogHelper = new DialogHelper();
+                dialogHelper.showLoginDialog(MainActivity.this);
             }
         });
     }
